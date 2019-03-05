@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using API.Requests;
 using API.Responses;
 using BLL.Entities;
 using BLL.IdentityWrappers;
-using Microsoft.AspNetCore.Http;
+using BLL.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -17,13 +15,14 @@ namespace API.Controllers
     {
         private readonly IUserManager _userManager;
         private readonly ISignInManager _signInManager;
-        
+        private readonly ITokenService _tokenService;
 
 
-        public AccountController(IUserManager userManager, ISignInManager signInManager)
+        public AccountController(IUserManager userManager, ISignInManager signInManager, ITokenService tokenService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _tokenService = tokenService;
         }
 
 
@@ -51,7 +50,7 @@ namespace API.Controllers
 
             await _signInManager.CheckPassword(actualUser, authorizeRequest.Password, false);
 
-
+            var token = 
         }
 
     }

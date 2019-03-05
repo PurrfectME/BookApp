@@ -1,5 +1,7 @@
 ﻿using BLL.Entities;
 using BLL.IdentityWrappers;
+using BLL.Interfaces;
+using BLL.Services;
 using DAL;
 using DAL.Context;
 using Microsoft.AspNetCore.Builder;
@@ -28,7 +30,7 @@ namespace API
 
             services.AddDbContext<ApplicationContext>(options =>
                 {
-                    options.UseSqlServer(Configuration["ConnectionStrings:BookApp"]);
+                    options.UseSqlServer(Configuration["ConnectionStrings:ES"]);
                 });
 
             services.AddIdentity<User, Role>()
@@ -42,8 +44,8 @@ namespace API
             services.AddTransient<ISignInManager, SignInManagerWrapper>();
             services.AddTransient<IRoleManager, RoleManagerWrapper>();
 
-
-
+            services.AddTransient<ITokenService, ITokenService>();
+            services.AddTransient<IConfigurationService, ConfigurationService>();
 
         }
 
