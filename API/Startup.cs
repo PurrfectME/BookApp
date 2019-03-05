@@ -1,5 +1,4 @@
-﻿using BLL.DataAccess;
-using BLL.Entities;
+﻿using BLL.Entities;
 using BLL.IdentityWrappers;
 using DAL;
 using DAL.Context;
@@ -38,7 +37,7 @@ namespace API
 
             services.AddTransient(x => x.GetRequiredService<ApplicationContext>().Users);
 
-            services.AddTransient<IUnitOfWork, UnitOfWork>();
+
             services.AddTransient<IUserManager, UserManagerWrapper>();
             services.AddTransient<ISignInManager, SignInManagerWrapper>();
             services.AddTransient<IRoleManager, RoleManagerWrapper>();

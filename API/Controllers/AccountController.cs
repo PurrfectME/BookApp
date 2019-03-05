@@ -45,7 +45,14 @@ namespace API.Controllers
 
         [HttpPost]
         [Route("Login")]
-        
+        public async Task<object> GenerateToken(AuthorizeUserModel authorizeRequest)
+        {
+            var actualUser = await _userManager.GetUserByEmail(authorizeRequest.Email);
+
+            await _signInManager.CheckPassword(actualUser, authorizeRequest.Password, false);
+
+
+        }
 
     }
 }
