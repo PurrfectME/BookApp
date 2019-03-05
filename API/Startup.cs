@@ -69,8 +69,10 @@ namespace API
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
             app.UseMvc(routes => { routes.MapRoute("default", "controller/action/{id}"); });
+            app.UseHttpsRedirection();
+            
+            app.UseAuthentication();
         }
     }
 }
