@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
+using BLL.AppStart;
 using BLL.Interfaces;
 using Microsoft.IdentityModel.Tokens;
 
@@ -10,7 +11,7 @@ namespace BLL.Services
     {
         private readonly JwtSecurityToken _jwt;
 
-        public TokenService(IConfigurationService configuration)
+        public TokenService(ITokenSettings configuration)
         {
             var configuration1 = configuration;
 

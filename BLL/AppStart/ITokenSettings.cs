@@ -1,15 +1,12 @@
-﻿namespace BLL.Interfaces
+﻿namespace BLL.AppStart
 {
-    public interface IConfigurationService
+    public interface ITokenSettings
     {
         string TokenSecretKey { get; }
         string TokenIssuer { get; }
         string TokenAudience { get; }
         string TokenLifetime { get; }
 
-        string ConnectionString { get; }
     }
 }
-
-
 

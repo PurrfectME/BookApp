@@ -1,14 +1,14 @@
 ﻿using BLL.Interfaces;
 using Microsoft.Extensions.Configuration;
 
-namespace BLL.Services
+namespace BLL.AppStart
 {
-    public class ConfigurationService : IConfigurationService
+    public class TokenSettings : ITokenSettings
     {
         private readonly IConfiguration _configuration;
 
 
-        public ConfigurationService(IConfiguration configuration)
+        public TokenSettings(IConfiguration configuration)
         {
             _configuration = configuration;
         }
@@ -19,6 +19,5 @@ namespace BLL.Services
         public string TokenAudience => _configuration["JwtTokenConfiguration:Audience"];
         public string TokenLifetime => _configuration["JwtTokenConfiguration:Lifetime"];
 
-        public string ConnectionString => _configuration.GetConnectionString("ES");
     }
 }

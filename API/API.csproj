@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    
   </PropertyGroup>
 
   <ItemGroup>
@@ -18,8 +19,6 @@
 
   <ItemGroup>
     <Folder Include="Validators\" />
-    <Folder Include="Responses\" />
-    <Folder Include="Requests\" />
   </ItemGroup>
 
 </Project>

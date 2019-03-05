@@ -30,8 +30,12 @@ namespace API.Controllers
         [Route("Register")]
         public async Task<ResponseUserModel> Register(UserRegisterModel requestModel)
         {
-            var userToRegister = (User) requestModel;
-            userToRegister.Id = Guid.NewGuid();
+            var userToRegister = new User
+            {
+                Email = requestModel.Email,
+                Id = Guid.NewGuid(),
+                UserName = requestModel.Email
+            };
 
             await _userManager.CreateUser(userToRegister, requestModel.Password);
 
@@ -50,7 +54,21 @@ namespace API.Controllers
 
             await _signInManager.CheckPassword(actualUser, authorizeRequest.Password, false);
 
-            var token = 
+
+            var configuredToken = new
+            {
+                access_token = _tokenService.GetEncodedJwtToken(),
+                userEmail = actualUser.Email
+            };
+
+            return configuredToken;
+        }
+
+        [HttpPost]
+        [Route("Logout")]
+        public async Task Logout()
+        {
+            await _signInManager.Logout();
         }
 
     }
