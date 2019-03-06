@@ -40,5 +40,6 @@ namespace BLL.Entities
 
     public class User : IdentityUser<Guid>
     {
+       
     }
 }

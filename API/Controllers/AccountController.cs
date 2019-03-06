@@ -30,18 +30,14 @@ namespace API.Controllers
         [Route("Register")]
         public async Task<ResponseUserModel> Register(UserRegisterModel requestModel)
         {
-            var userToRegister = new User
-            {
-                Email = requestModel.Email,
-                Id = Guid.NewGuid(),
-                UserName = requestModel.Email
-            };
+            var userToRegister = (User) requestModel;
+            userToRegister.Id = Guid.NewGuid();
 
             await _userManager.CreateUser(userToRegister, requestModel.Password);
 
             var responseUser = new ResponseUserModel {Email = userToRegister.Email};
 
-            await _userManager.AddToRole(userToRegister, "Admin");
+            await _userManager.AddToRole(userToRegister, "User");
 
             return responseUser;
         }

@@ -1,4 +1,5 @@
 ﻿using API.Responses;
+using BLL.Entities;
 
 namespace API.Requests
 {
@@ -19,6 +20,14 @@ namespace API.Requests
             return new ResponseUserModel
             {
                 Email = model.Email
+            };
+        }
+
+        public static explicit operator User(AuthorizeUserModel userModel)
+        {
+            return new User {
+                Email = userModel.Email,
+
             };
         }
     }

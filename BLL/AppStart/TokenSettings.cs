@@ -1,5 +1,4 @@
-﻿using BLL.Interfaces;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 
 namespace BLL.AppStart
 {
