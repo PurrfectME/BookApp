@@ -9,6 +9,10 @@
     <PackageReference Include="Moq" Version="4.10.1" />
     <PackageReference Include="NLog.Extensions.Logging" Version="1.4.0" />
     <PackageReference Include="xunit" Version="2.4.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
@@ -17,6 +21,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="EntityFrameworkCoreMock.Moq">
+      <HintPath>C:\Users\Dmitry.Efremov\.nuget\packages\entityframeworkcoremock.moq\1.0.0.20\lib\netstandard2.0\EntityFrameworkCoreMock.Moq.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore">
       <HintPath>C:\Users\Dmitry.Efremov\.nuget\packages\microsoft.aspnetcore.identity.entityframeworkcore\2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll</HintPath>
     </Reference>

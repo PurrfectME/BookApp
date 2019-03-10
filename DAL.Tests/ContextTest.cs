@@ -26,9 +26,9 @@ namespace DAL.Tests
             var unitOfWork = new UnitOfWork(contextMock.Object);
 
             //var r = new ApplicationContext(options);
-            
+
             //act
-            //await unitOfWork.Save();
+            await unitOfWork.Commit();
 
             //assert
             contextMock.Verify(x => x.SaveChangesAsync(CancellationToken.None), Times.Once);
