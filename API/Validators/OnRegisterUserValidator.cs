@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using API.Requests;
+﻿using API.Requests;
 using BLL.IdentityWrappers;
 using FluentValidation;
 
@@ -7,31 +6,17 @@ namespace API.Validators
 {
     public class OnRegisterUserValidator : AbstractValidator<UserRegisterModel>
     {
-        private readonly IUserManager _userManager;
-
-
         public OnRegisterUserValidator(IUserManager userManager)
         {
-            _userManager = userManager;
-
-            
-
-            RuleFor(x => x.Email).EmailAddress().NotEmpty().MustAsync((model, email, context) =>
+            RuleFor(x => x.Email).EmailAddress().NotEmpty().MustAsync( async (model, email, context) =>
             {
-                var uniqueUser = ValidateOnUniqueUser(email);
-                return uniqueUser;
+                var userResult = await userManager.GetUserByEmail(email);
+                return userResult == null;
             }).WithMessage($"Current email is already taken.");
 
             RuleFor(x => x.Password).NotEmpty().MinimumLength(5).MaximumLength(20);
 
 
-        }
-
-        
-        private async Task<bool> ValidateOnUniqueUser(string email)
-        {
-            var userResult = await _userManager.GetUserByEmail(email);
-            return userResult == null;
         }
     }
 }

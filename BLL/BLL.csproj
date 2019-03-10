@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="EffectiveSoft.Data.Core" Version="1.0.0" />
+    <PackageReference Include="EffectiveSoft.Data.Core" Version="1.0.1" />
   </ItemGroup>
 
 </Project>

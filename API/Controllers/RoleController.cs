@@ -30,5 +30,12 @@ namespace API.Controllers
             
             return roleModel;
         }
+
+        [HttpPost]
+        [Route("UserClaim/{roleName}")]
+        public async Task AddClaimToUsers(string roleName)
+        {
+            await _roleManager.AddClaimsToRole(roleName);
+        }
     }
 }
