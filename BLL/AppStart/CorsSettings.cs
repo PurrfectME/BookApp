@@ -8,6 +8,4 @@ namespace BLL.AppStart
         public IEnumerable<string> Headers { get; } = new List<string>();
         public IEnumerable<string> Methods { get; } = new List<string>();
     }
-
-    
 }

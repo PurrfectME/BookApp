@@ -12,7 +12,7 @@ namespace BLL.Services
     {
         private readonly JwtSecurityToken _jwt;
 
-        public TokenService(ITokenSettings configuration, IRoleManager manager)
+        public TokenService(ConfigurationSettings configuration, IRoleManager manager)
         {
             var configuration1 = configuration;
 

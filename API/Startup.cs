@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Linq;
+using API.Validators;
 using BLL.AppStart;
 using BLL.Entities;
 using BLL.IdentityWrappers;
 using BLL.Interfaces;
 using BLL.Services;
 using DAL.Context;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http.Internal;
@@ -30,11 +32,20 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc().AddFluentValidation(fv =>
+            {
+                fv.RegisterValidatorsFromAssemblyContaining<OnRegisterUserValidator>();
+                fv.RegisterValidatorsFromAssemblyContaining<OnAuthorizeUserValidator>();
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
+
+            services.AddTransient<ConfigurationSettings>();
+            var sp = services.BuildServiceProvider();
+            var configSettings = sp.GetRequiredService<ConfigurationSettings>();
+            
             services.AddDbContext<ApplicationContext>(options =>
                 {
-                    options.UseSqlServer(Configuration["ConnectionStrings:ES"]);
+                    options.UseSqlServer(configSettings.ConnectionString);
                 });
 
             services.AddIdentity<User, Role>(options =>
@@ -71,11 +82,11 @@ namespace API
             services.AddTransient<IRoleManager, RoleManagerWrapper>();
 
             services.AddTransient<ITokenService, TokenService>();
-            services.AddTransient<ITokenSettings, TokenSettings>();
+            
 
 
 
-            var sp = services.BuildServiceProvider();
+            
             var corsSetting = sp.GetService<IOptions<CorsSettings>>().Value;
             
             services.AddCors(options =>
