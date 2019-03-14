@@ -15,9 +15,9 @@ namespace BLL.IdentityWrappers
         }
 
 
-        public async Task<SignInResult> CheckPassword(User user, string password, bool lockoutOnFailure)
+        public Task<SignInResult> CheckPassword(User user, string password, bool lockoutOnFailure)
         {
-            return await _manager.CheckPasswordSignInAsync(user, password, lockoutOnFailure); ;
+            return _manager.CheckPasswordSignInAsync(user, password, lockoutOnFailure); ;
         }
 
         public async Task Logout()

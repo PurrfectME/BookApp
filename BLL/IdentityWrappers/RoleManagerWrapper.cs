@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using BLL.ClaimsTypes;
 using BLL.Entities;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 
 namespace BLL.IdentityWrappers
 {
@@ -19,10 +18,10 @@ namespace BLL.IdentityWrappers
             _manager = manager;
         }
 
-        public async Task<IList<Claim>> GetRoleClaims(string roleName)
+        public Task<IList<Claim>> GetRoleClaims(string roleName)
         {
-            var roles = await _manager.Roles.SingleAsync(x => x.Name == roleName);
-            return await _manager.GetClaimsAsync(roles);
+            var roles = _manager.Roles.Single(x => x.Name == roleName);
+            return _manager.GetClaimsAsync(roles);
         }
 
         public async Task AddClaimsToRole(string roleName)
@@ -32,14 +31,14 @@ namespace BLL.IdentityWrappers
             await _manager.AddClaimAsync(role, new Claim(BaseClaimTypes.Permission, UserClaim.Add));
         }
 
-        public async Task<IdentityResult> AddRole(Role roleToAdd)
+        public Task<IdentityResult> AddRole(Role roleToAdd)
         {
-            return await _manager.CreateAsync(roleToAdd); ;
+            return _manager.CreateAsync(roleToAdd); ;
         }
 
-        public async Task<IdentityResult> RemoveRole(Role roleToRemove)
+        public Task<IdentityResult> RemoveRole(Role roleToRemove)
         {
-            return await _manager.DeleteAsync(roleToRemove);
+            return _manager.DeleteAsync(roleToRemove);
         }
 
         public List<Role> GetAllRolesSync()
